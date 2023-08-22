@@ -9,7 +9,7 @@
 void inizializzaClienti(Cliente clienti[]) {
     char *nomi[] = {"Mario", "Luca", "Francesca", "Maria", "Giulia", "Marco", "Roberto", "Anna", "Elisa", "Federico", "Riccardo", "Luisa", "Paolo", "Elena", "Simone", "Alessandra", "Gabriele", "Laura", "Davide", "Sara"};
     char *cognomi[] = {"Rossi", "Bianchi", "Verdi", "Neri", "Gialli", "Bruni", "Romano", "Colombo", "Ricci", "Costa", "Barbieri", "Fontana", "Rizzo", "Moretti", "Marino", "Greco", "Conti", "De Luca", "Mancini", "Rinaldi"};
-    printf("cazzo");
+    printf("non entra");
     for (int i = 0; i < 20; i++) {
         snprintf(clienti[i].idCliente, sizeof(clienti[i].idCliente), "ID%03d", i+1);
         strncpy(clienti[i].nome, nomi[i], sizeof(clienti[i].nome) - 1);
