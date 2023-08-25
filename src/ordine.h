@@ -7,6 +7,8 @@
 
 
 #define MAX_ORDINI 100
+#define MAX_ID_ORDINE 10
+
 
 #define IN_ESECUZIONE 0
 #define EVADED 1
@@ -19,16 +21,15 @@ typedef enum {
 } StatoOrdine;
 
 typedef struct {
-
     char idOrdine[50];
-    Cliente *cliente[50];
-    Libro *libro[50];
+    Cliente *cliente;
+    Libro *libro;
     int quantita;
     StatoOrdine stato;
 } Ordine;
 
 
-
+void inizializzaOrdini(Ordine ordini[]);
 int salvaOrdini(Ordine ordini[], int numeroOrdini);
 int aggiungiOrdine(Ordine ordini[], int *numeroOrdini, Ordine nuovoOrdine);
 int modificaOrdine(Ordine ordini[], int numeroOrdini, char idOrdine[], Ordine nuovoOrdine);

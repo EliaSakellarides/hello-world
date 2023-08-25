@@ -55,6 +55,25 @@ void inizializzaLibri(Libro libri[]) {
        }
    }
 
+void visualizzaLibri(Libro libri[], int numeroLibri) {
+    if (numeroLibri == 0) {
+        printf("Non ci sono libri disponibili.\n");
+        return;
+    }
+
+
+        printf("Ecco la lista dei libri:\n");
+        printf("-------------------------------------------------------------------------------\n");
+        printf("%-10s %-30s %-30s %-20s %-5s %-20s\n",
+               "ID", "Titolo", "Autore", "ISBN", "Anno", "Scuola");
+        printf("-------------------------------------------------------------------------------\n");
+        for (int i = 0; i < numeroLibri; i++) {
+            printf("%-10s %-30s %-30s %-20s %-5d %-20s\n",
+                   libri[i].idLibro, libri[i].titolo, libri[i].autore,
+                   libri[i].isbn, libri[i].annoPubblicazione, libri[i].scuola);
+        }
+        printf("-------------------------------------------------------------------------------\n");
+    }
 
 
 void caricaLibri(Libro libri[], int *numeroLibri) {

@@ -14,6 +14,7 @@ typedef struct{
 
 } Libro;
 
+void visualizzaLibri(Libro libri[], int numeroLibri);
 
 void inizializzaLibri(Libro libri[]);
 

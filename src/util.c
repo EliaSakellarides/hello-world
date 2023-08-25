@@ -8,3 +8,16 @@ void pulisciBuffer() {
     int ch;
     while ((ch = getchar()) != '\n' && ch != EOF);
 }
+
+void leggiRiga(char* buffer, int size) {
+
+    if (buffer && size > 0) {
+        if (fgets(buffer, size, stdin)) {
+            // Rimuovere il newline alla fine, se presente
+            char* newline = strchr(buffer, '\n');
+            if (newline) {
+                *newline = '\0';
+            }
+        }
+    }
+}
