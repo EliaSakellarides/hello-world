@@ -4,24 +4,27 @@
 
 #define FILE_LIBRI "libri.bin"
 
+
+
+
 void inizializzaLibri(Libro libri[]) {
     char *titoli[] = {
-        "Storia Primaria", "Italiano Primaria", "Inglese Primaria", "Matematica Primaria", "Scienze Primaria",
-        "Geografia Primaria", "Arte Primaria", "Musica Primaria", "Civica Primaria", "Sport Primaria",
-        "Storia Secondaria", "Italiano Secondaria", "Inglese Secondaria", "Matematica Secondaria", "Scienze Secondaria",
-        "Geografia Secondaria", "Arte Secondaria", "Musica Secondaria", "Civica Secondaria", "Sport Secondaria"
+        "Storia del Mondo", "Grammatica Italiana", "English Basics", "Matematica Applicata", "Introduzione alle Scienze",
+        "Geografia Generale", "L'Arte del Rinascimento", "Musica Classica Europea", "Diritto e Cittadinanza", "Lo Sport e la Mente",
+        "Storia Contemporanea", "Letteratura Italiana", "English for Business", "Algebra e Geometria", "Scienze della Terra",
+        "Geografia Economica", "Arte Moderna", "Musica nel XX Secolo", "Etica e Società", "Sport e Medicina"
     };
 
     char *autori[] = {
-        "Autore Storia P", "Autore Italiano P", "Autore Inglese P", "Autore Matematica P", "Autore Scienze P",
-        "Autore Geografia P", "Autore Arte P", "Autore Musica P", "Autore Civica P", "Autore Sport P",
-        "Autore Storia S", "Autore Italiano S", "Autore Inglese S", "Autore Matematica S", "Autore Scienze S",
-        "Autore Geografia S", "Autore Arte S", "Autore Musica S", "Autore Civica S", "Autore Sport S"
+        "Mario Rossi", "Lucia Bianchi", "John Smith", "Elena Verdi", "Franco Nero",
+        "Anna Giallo", "Stefano Blu", "Laura Marrone", "Giuseppe Arancio", "Paola Viola",
+        "Antonio Grigio", "Sofia Rosato", "Michael Brown", "Carla Verde", "Riccardo Giallo",
+        "Bruno Bianco-nero", "Sara Arcobaleno", "Tommaso Tuono", "Chiara Nuvola", "Roberto Sole"
     };
 
     int anniPubblicazione[] = {
-        2000, 2005, 2010, 2015, 2020, 2002, 2007, 2012, 2017, 2004,
-        2009, 2014, 2019, 2006, 2011, 2016, 2008, 2013, 2018, 2003
+        2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
+        2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019
     };
 
     char *isbn[] = {
@@ -31,12 +34,22 @@ void inizializzaLibri(Libro libri[]) {
         "ISBN016", "ISBN017", "ISBN018", "ISBN019", "ISBN020"
     };
 
-    char *scuole[] = {
-        "Scuola Primaria", "Scuola Primaria", "Scuola Primaria", "Scuola Primaria", "Scuola Primaria",
-        "Scuola Primaria", "Scuola Primaria", "Scuola Primaria", "Scuola Primaria", "Scuola Primaria",
-        "Scuola Secondaria", "Scuola Secondaria", "Scuola Secondaria", "Scuola Secondaria", "Scuola Secondaria",
-        "Scuola Secondaria", "Scuola Secondaria", "Scuola Secondaria", "Scuola Secondaria", "Scuola Secondaria"
-    };
+    char *scuola[20];
+
+       // Inizializza "Scuola Primaria" per i primi 10 libri
+       for (int i = 0; i < 10; i++) {
+           scuola[i] = "Scuola Primaria";
+       }
+
+       // Inizializza "Scuola Secondaria I Grado" per i libri dall'11 al 15
+       for (int i = 10; i < 15; i++) {
+           scuola[i] = "Scuola Secondaria I Grado";
+       }
+
+       // Inizializza "Scuola Secondaria II Grado" per i libri dal 16 al 20
+       for (int i = 15; i < 20; i++) {
+           scuola[i] = "Scuola Secondaria II Grado";
+       }
 
     for (int i = 0; i < 20; i++) {
            snprintf(libri[i].idLibro, sizeof(libri[i].idLibro), "L%03d", i+1);
@@ -50,7 +63,7 @@ void inizializzaLibri(Libro libri[]) {
            strncpy(libri[i].isbn, isbn[i], sizeof(libri[i].isbn) - 1);
            libri[i].isbn[sizeof(libri[i].isbn) - 1] = '\0';  // Termination for safety
 
-           strncpy(libri[i].scuola, scuole[i], sizeof(libri[i].scuola) - 1);
+           strncpy(libri[i].scuola, scuola[i], sizeof(libri[i].scuola) - 1);
            libri[i].scuola[sizeof(libri[i].scuola) - 1] = '\0';  // Termination for safety
        }
    }

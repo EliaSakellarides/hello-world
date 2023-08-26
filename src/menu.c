@@ -25,10 +25,12 @@ void mostraMenu() {
 }
 
 void gestioneMenu(Cliente clienti[], int* numeroClienti, Ordine ordini[], int* numeroOrdini, Libro libri[], int numeroLibri) {    int scelta;
-    do {
-    		mostraMenu();
-    	    scanf("%d", &scelta);
-    	    pulisciBuffer();
+	do {
+		mostraMenu();
+		char bufferScelta[10];  //
+		leggiRiga(bufferScelta, sizeof(bufferScelta));
+		sscanf(bufferScelta, "%d", &scelta);
+
 
         Cliente nuovoCliente = {0};
         Ordine nuovoOrdine = {0};
@@ -36,11 +38,16 @@ void gestioneMenu(Cliente clienti[], int* numeroClienti, Ordine ordini[], int* n
         char idOrdine[10];
 
         switch (scelta) {
-            case 1:
-                printf("Inserisci le informazioni del nuovo cliente:\n");
-                // Input per il nuovo cliente...
-                aggiungiCliente(clienti, numeroClienti, nuovoCliente);
-                break;
+        case 1:
+            printf("Inserisci le informazioni del nuovo cliente:\n");
+            printf("Inserisci l'ID del cliente: (si prega di utilizzare un ID simile C01,C02 ecc. ");
+            leggiRiga(nuovoCliente.idCliente, sizeof(nuovoCliente.idCliente));
+            printf("Inserisci il nome, ");
+            leggiRiga(nuovoCliente.nome, sizeof(nuovoCliente.nome));
+            printf("Inserisci il cognome: ");
+            leggiRiga(nuovoCliente.cognome, sizeof(nuovoCliente.cognome));
+            aggiungiCliente(clienti, numeroClienti, &nuovoCliente);
+            break;
 
             case 2:
 		    printf("Inserisci l'ID del cliente da modificare:\n");
@@ -58,11 +65,11 @@ void gestioneMenu(Cliente clienti[], int* numeroClienti, Ordine ordini[], int* n
 
             case 3:
                 printf("Inserisci l'ID del cliente da cancellare:\n");
-                scanf("%s", idCliente);
+                leggiRiga(idCliente, sizeof(idCliente)); // using leggiRiga instead of scanf
                 cancellaCliente(clienti, numeroClienti, idCliente);
                 break;
             case 4:
-            	visualizzaClienti(clienti, numeroClienti);
+            	visualizzaClienti(clienti, *numeroClienti);
             	break;
             case 5:
                 printf("Inserisci le informazioni del nuovo ordine:\n");
@@ -71,14 +78,14 @@ void gestioneMenu(Cliente clienti[], int* numeroClienti, Ordine ordini[], int* n
                 break;
             case 6:
                 printf("Inserisci l'ID dell'ordine da modificare:\n");
-                scanf("%s", idOrdine);
+                leggiRiga(idOrdine, sizeof(idOrdine)); // using leggiRiga instead of scanf
                 printf("Inserisci le nuove informazioni dell'ordine:\n");
                 // Input per le nuove informazioni dell'ordine...
                 modificaOrdine(ordini, *numeroOrdini, idOrdine, nuovoOrdine);
                 break;
             case 7:
                 printf("Inserisci l'ID dell'ordine da cancellare:\n");
-                scanf("%s", idOrdine);
+                leggiRiga(idOrdine, sizeof(idOrdine)); // using leggiRiga instead of scanf
                 cancellaOrdine(ordini, numeroOrdini, idOrdine);
                 break;
             case 8:
@@ -86,7 +93,7 @@ void gestioneMenu(Cliente clienti[], int* numeroClienti, Ordine ordini[], int* n
                 break;
             case 9:
                 printf("Inserisci l'ID dell'ordine da evadere:\n");
-                scanf("%s", idOrdine);
+                leggiRiga(idOrdine, sizeof(idOrdine));
                 evadiOrdine(ordini, *numeroOrdini, idOrdine);
                 break;
             case 10:

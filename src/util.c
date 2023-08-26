@@ -1,19 +1,18 @@
-// util.c
-#include "util.h"      // Includi il file header per le funzioni di utilità
-#include <stdio.h>     // Includi il file header standard per l'input/output
-#include <stdlib.h>    // Includi il file header standard per le funzioni di allocazione
+#include "util.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 void pulisciBuffer() {
     int ch;
+    // Discard characters until a newline or end of file is encountered
     while ((ch = getchar()) != '\n' && ch != EOF);
 }
 
 void leggiRiga(char* buffer, int size) {
-
     if (buffer && size > 0) {
         if (fgets(buffer, size, stdin)) {
-            // Rimuovere il newline alla fine, se presente
+            // Remove the newline character at the end, if present
             char* newline = strchr(buffer, '\n');
             if (newline) {
                 *newline = '\0';

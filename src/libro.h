@@ -9,7 +9,7 @@ typedef struct{
 	int annoPubblicazione;
 	char isbn [20];
 	char idLibro[20];
-	char scuola[50]; //es. Scuola primaria o secondaria
+	char *scuola[20]; //es. Scuola primaria o secondaria
 	
 
 } Libro;

@@ -54,8 +54,11 @@ void caricaOrdini(Ordine ordini[], int* numeroOrdini, int maxSize) {
         count++;
     }
 
-    fclose(file);
-    *numeroOrdini = count; 
+    if (fclose(file) != 0) {
+        perror("Failed to close the file");
+        return;
+    }
+    *numeroOrdini = count;
 }
 
 int aggiungiOrdine(Ordine ordini[], int *numeroOrdini, Ordine nuovoOrdine) {
@@ -120,6 +123,6 @@ void visualizzaOrdini(const Ordine ordini[], int numeroOrdini) {
         printf("Libro: %s\n", ordini[i].libro->titolo);
         printf("Quantita: %d\n", ordini[i].quantita);
         printf("Stato: %s\n", statoToString(ordini[i].stato));
-        printf("\n");
+        printf("\n-------------------------\n");
     }
 }

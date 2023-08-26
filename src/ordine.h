@@ -21,7 +21,7 @@ typedef enum {
 } StatoOrdine;
 
 typedef struct {
-    char idOrdine[50];
+    char idOrdine[MAX_ID_ORDINE];
     Cliente *cliente;
     Libro *libro;
     int quantita;
