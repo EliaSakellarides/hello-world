@@ -23,7 +23,7 @@ Ordine* ricercaOrdine(Ordine ordini[], int numeroOrdini, char id[]);
  * @param id The ID of the customer to be searched.
  * @return A pointer to the customer if found; otherwise, NULL.
  */
-Cliente* ricercaCliente(Cliente clienti[], int numeroClienti, char id[]);
+Cliente* ricercaCliente(Cliente clienti[], int numeroClienti, const char id[]);
 
 /**
  * Searches for a book using its ISBN.

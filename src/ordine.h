@@ -28,7 +28,7 @@ typedef struct {
     StatoOrdine stato;
 } Ordine;
 
-
+void generaOrdiniRandom(Ordine ordini[], int *numeroOrdini, Cliente clienti[], int numeroClienti, Libro libri[], int numeroLibri) {
 void inizializzaOrdini(Ordine ordini[]);
 int salvaOrdini(Ordine ordini[], int numeroOrdini);
 int aggiungiOrdine(Ordine ordini[], int *numeroOrdini, Ordine nuovoOrdine);

@@ -159,6 +159,10 @@ int modificaCliente(Cliente clienti[], int numeroClienti, const char id[], const
     return -1;
 }
 
+
+
+
+
 int cancellaCliente(Cliente clienti[], int *numeroClienti, const char id[]) {
     for (int i = 0; i < *numeroClienti; i++) {
         if (strcmp(clienti[i].idCliente, id) == 0) {

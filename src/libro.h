@@ -9,7 +9,7 @@ typedef struct{
 	int annoPubblicazione;
 	char isbn [20];
 	char idLibro[20];
-	char *scuola[20]; //es. Scuola primaria o secondaria
+	char scuola[20]; //es. Scuola primaria o secondaria
 	
 
 } Libro;
@@ -33,5 +33,6 @@ void aggiungiLibro(Libro libri[], int *numeroLibri, const Libro *nuovoLibro);
 //ricerca libro per codice ISBN
 
 const Libro *ricercaLibroPerISBN(const Libro libri[], int numeroLibri, const char *isbn);
+
 
 #endif // LIBRO_H

@@ -23,6 +23,8 @@ int modificaCliente(Cliente clienti[], int numeroClienti,const char id[], const 
 int cancellaCliente(Cliente clienti[], int *numeroClienti,const char id[]);
 void visualizzaClienti(const Cliente clienti[], int numeroClienti);
 int caricaClienti(Cliente clienti[], int *numeroClienti);
+Cliente* trovaClientePerId(Cliente* clienti, int numeroClienti, char* idCliente);
+
 
 
 #endif

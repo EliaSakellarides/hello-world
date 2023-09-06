@@ -123,11 +123,29 @@ void aggiungiLibro(Libro libri[], int *numeroLibri, const Libro *nuovoLibro) {
     salvaLibri(libri, *numeroLibri);
 }
 
-const Libro *ricercaLibroPerISBN(const Libro libri[], int numeroLibri, const char *isbn) {
-    for (int i = 0; i < numeroLibri; i++) {
-        if (strcmp(libri[i].isbn, isbn) == 0) {
+
+
+Libro* trovaLibroPerIdOTitolo(Libro* libri, int numeroLibri, char* inputLibro) {
+    for(int i = 0; i < numeroLibri; i++) {
+        if (strcmp(libri[i].titolo, inputLibro) == 0 || strcmp(libri[i].idLibro, inputLibro) == 0) {
+            // Trovato libro con il titolo o l'ID specificato
             return &libri[i];
         }
-    }  
-    return NULL;
+    }
+    return NULL; // ritorna NULL se il libro non viene trovato
 }
+
+
+
+const Libro *ricercaLibroPerISBN(const Libro libri[], int numeroLibri, const char *isbn)
+{
+    for(int i = 0; i < numeroLibri; i++) {
+        if(strcmp(libri[i].isbn, isbn) == 0) {
+            return &libri[i];
+        }
+    }
+
+
+    return NULL;  // Restituisci NULL se l'ISBN non viene trovato
+}
+

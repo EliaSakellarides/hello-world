@@ -3,6 +3,7 @@
 #include "ordine.h"
 #include "cliente.h"
 #include "libro.h"
+#include <stdlib.h>
 
 
 const char* statoToString(StatoOrdine stato) {
@@ -115,9 +116,19 @@ int evadiOrdine(Ordine ordini[], int numeroOrdini, char idOrdine[]) {
 }
 
 void visualizzaOrdini(const Ordine ordini[], int numeroOrdini) {
+    if (ordini == NULL || numeroOrdini <= 0) {
+        printf("Nessun ordine da visualizzare.\n");
+        return;
+    }
+
     for (int i = 0; i < numeroOrdini; i++) {
+        if (ordini[i].cliente == NULL || ordini[i].libro == NULL) {
+        	printf("Ordine con ID %s non valido.\n", ordini[i].idOrdine);
+            continue;
+        }
+
         printf("ID Ordine: %s\n", ordini[i].idOrdine);
-        printf("ID Cliente: %s\n", ordini[i].cliente->idCliente);  // Accesso corretto ai campi con puntatori
+        printf("ID Cliente: %s\n", ordini[i].cliente->idCliente);
         printf("Cliente: %s %s\n", ordini[i].cliente->nome, ordini[i].cliente->cognome);
         printf("ID Libro: %s\n", ordini[i].libro->idLibro);
         printf("Libro: %s\n", ordini[i].libro->titolo);
@@ -126,3 +137,8 @@ void visualizzaOrdini(const Ordine ordini[], int numeroOrdini) {
         printf("\n-------------------------\n");
     }
 }
+
+
+
+
+
