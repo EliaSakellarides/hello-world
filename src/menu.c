@@ -38,10 +38,12 @@ void gestioneMenu(Cliente clienti[], int* numeroClienti, Ordine ordini[], int* n
         char bufferScelta[10];  //
         leggiRiga(bufferScelta, sizeof(bufferScelta));
         sscanf(bufferScelta, "%d", &scelta);
-        fflush(stdin); // Pulizia del buffer di input
+        pulisciBuffer();
 
         switch (scelta) {
         case 1:
+            nuovoCliente = (Cliente){0};  // Re-inizializza
+
             printf("Inserisci le informazioni del nuovo cliente:\n");
             printf("Inserisci l'ID del cliente: (si prega di utilizzare un ID simile C01,C02 ecc. ");
             leggiRiga(nuovoCliente.idCliente, sizeof(nuovoCliente.idCliente));
@@ -77,6 +79,8 @@ void gestioneMenu(Cliente clienti[], int* numeroClienti, Ordine ordini[], int* n
             break;
 
         case 5:
+            nuovoOrdine = (Ordine){0}; // Re-inizializza
+
             printf("Inserisci le informazioni del nuovo ordine:\n");
             printf("Elenco degli ISBN dei libri:\n");
             for (int i = 0; i < numeroLibri; i++) {
@@ -107,10 +111,11 @@ void gestioneMenu(Cliente clienti[], int* numeroClienti, Ordine ordini[], int* n
                 break;
             }
 
-            strcpy(nuovoOrdine.idCliente, clienteSelezionato->idCliente);
-            strcpy(nuovoOrdine.isbn, libroSelezionato->isbn);
-
+            nuovoOrdine.cliente = clienteSelezionato;
+            clienteSelezionato->numeroOrdini += 1;
+            nuovoOrdine.libro = libroSelezionato;
             aggiungiOrdine(ordini, numeroOrdini, nuovoOrdine);
+
             break;
 
         case 6:
@@ -127,36 +132,27 @@ void gestioneMenu(Cliente clienti[], int* numeroClienti, Ordine ordini[], int* n
             cancellaOrdine(ordini, numeroOrdini, idOrdine);
             break;
 
+
         case 8:
             printf("Sto eseguendo il case 8!\n");
             printf("Numero di ordini: %d\n", *numeroOrdini);
-            printf("Sto entrando nella funzione visualizzaOrdini!\n");
 
-            for (int i = 0; i < *numeroOrdini; i++)
-            {
-                printf("Sto analizzando l'ordine %d\n", i+1);
-
-                if (ordini[i].idCliente[0] == '\0' || ordini[i].isbn[0] == '\0')
-                {
-                	if (ordini[i].idCliente[0] == '\0') {
-                        printf("Ordine %d ha cliente NULL.\n", i+1);
-                    }
-                	if (ordini[i].isbn[0] == '\0') {
-                        printf("Ordine %d ha libro NULL.\n", i+1);
-                    }
-                    continue;
-                }
-
-                Cliente* tempCliente = ricercaCliente(clienti, *numeroClienti, ordini[i].idCliente);
-                Libro* tempLibro = ricercaLibro(libri, numeroLibri, ordini[i].isbn);
-                if(tempCliente) {
-                    strcpy(ordini[i].idCliente, tempCliente->idCliente);
-                }
-                if(tempLibro) {
-                    strcpy(ordini[i].isbn, tempLibro->isbn);
+            for (int i = 0; i < *numeroOrdini; i++) {
+                if (ordini[i].cliente && ordini[i].libro) {
+                    printf("%s %s ordini(%d): %s (Autore: %s, Anno: %d, ISBN: %s, ID Libro: %s, Scuola: %s)\n",
+                           ordini[i].cliente->nome,
+                           ordini[i].cliente->cognome,
+                           ordini[i].cliente->numeroOrdini,
+                           ordini[i].libro->titolo,
+                           ordini[i].libro->autore,
+                           ordini[i].libro->annoPubblicazione,
+                           ordini[i].libro->isbn,
+                           ordini[i].libro->idLibro,
+                           ordini[i].libro->scuola);
+                } else {
+                    printf("Ordine con informazioni mancanti o errate.\n");
                 }
             }
-            visualizzaOrdini(clienti, *numeroClienti, ordini, *numeroOrdini, libri, numeroLibri);
             break;
         case 9:
             printf("Inserisci l'ID dell'ordine da evadere:\n");

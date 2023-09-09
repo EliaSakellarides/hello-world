@@ -137,15 +137,12 @@ Libro* trovaLibroPerIdOTitolo(Libro* libri, int numeroLibri, char* inputLibro) {
 
 
 
-const Libro *ricercaLibroPerISBN(const Libro libri[], int numeroLibri, const char *isbn)
-{
-    for(int i = 0; i < numeroLibri; i++) {
-        if(strcmp(libri[i].isbn, isbn) == 0) {
+const Libro* ricercaLibroPerISBN(const Libro* libri, int numeroLibri, const char* isbn) {
+    for (int i = 0; i < numeroLibri; i++) {
+        if (strcmp(libri[i].isbn, isbn) == 0) {
             return &libri[i];
         }
     }
-
-
-    return NULL;  // Restituisci NULL se l'ISBN non viene trovato
+    return NULL; // non trovato
 }
 

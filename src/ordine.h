@@ -21,18 +21,16 @@ typedef enum {
 } StatoOrdine;
 
 typedef struct {
-	char idOrdine[10];
-	char idCliente[MAX_ID + 1];
-	char idLibro[20];
-	char isbn[20];
-	Cliente* cliente;
-	Libro* libro;
+    char idOrdine[MAX_ID_ORDINE];
+    Cliente* cliente;
+    Libro* libro;
     int quantita;
     StatoOrdine stato;
 } Ordine;
 
 
-void inizializzaOrdini(const Cliente clienti[], const Libro libri[], Ordine ordini[], int numeroClienti, int numeroLibri);
+
+void inizializzaOrdini(Cliente *clienti, Libro *libri, Ordine *ordini, int numeroClienti, int numeroLibri);
 int salvaOrdini(Ordine ordini[], int numeroOrdini);
 int aggiungiOrdine(Ordine ordini[], int *numeroOrdini, Ordine nuovoOrdine);
 int modificaOrdine(Ordine ordini[], int numeroOrdini, char idOrdine[], Ordine nuovoOrdine);

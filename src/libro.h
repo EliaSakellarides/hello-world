@@ -2,6 +2,8 @@
 #ifndef LIBRO_H
 #define LIBRO_H
 #define MAX_LIBRI 100
+#define LIBRI_FILE_VERSION 1
+
 
 typedef struct{
 	char titolo [100];
@@ -10,8 +12,6 @@ typedef struct{
 	char isbn [20];
 	char idLibro[20];
 	char scuola[20]; //es. Scuola primaria o secondaria
-	
-
 } Libro;
 
 void visualizzaLibri(Libro libri[], int numeroLibri);

@@ -48,24 +48,20 @@ void visualizzaClienti(const Cliente clienti[], int numeroClienti) {
         printf("Non ci sono clienti disponibili.\n");
         return;
     }
-    for (int i = 0; i < numeroClienti; i++) {
-        printf("Debug: Stampa cliente %d\n", i+1);
-        printf("%-4s %-10s %-10s %-20i\n",
-               clienti[i].idCliente, clienti[i].nome, clienti[i].cognome, clienti[i].numeroOrdini);
-    }
-
 
     printf("Ecco la lista dei clienti:\n");
     printf("-------------------------------------------------------------------------------\n");
     printf("%-4s %-10s %-10s %-20s\n", "ID", "Nome", "Cognome", "Numero Ordini");
     printf("-------------------------------------------------------------------------------\n");
+
     for (int i = 0; i < numeroClienti; i++) {
         printf("%-4s %-10s %-10s %-20d\n",
                clienti[i].idCliente, clienti[i].nome, clienti[i].cognome, clienti[i].numeroOrdini);
     }
-    printf("-------------------------------------------------------------------------------\n");
 
+    printf("-------------------------------------------------------------------------------\n");
 }
+
 
 int caricaClienti(Cliente clienti[], int* numeroClienti) {
     FILE *clientiBinFile = fopen(FILE_CLIENTI, "rb");

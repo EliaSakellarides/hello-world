@@ -18,32 +18,25 @@ const char* statoToString(StatoOrdine stato) {
 
 
 
-void inizializzaOrdini(const Cliente clienti[], const Libro libri[], Ordine ordini[], int numeroClienti, int numeroLibri) {
+void inizializzaOrdini(Cliente *clienti, Libro *libri, Ordine *ordini, int numeroClienti, int numeroLibri) {
 
-    // Supponiamo che tu voglia creare un ordine per ogni cliente e libro
-    int count = 0; // Questo terrà traccia di quanti ordini sono stati effettivamente creati
-
+    int count = 0;
     for (int i = 0; i < numeroClienti; i++) {
         for (int j = 0; j < numeroLibri; j++) {
             if (count >= MAX_ORDINI) {
                 printf("Raggiunto il massimo numero di ordini possibili.\n");
                 return;
             }
-
             // Inizializzazione dell'ordine
-            strncpy(ordini[count].idOrdine, clienti[i].idCliente, MAX_ID + 1);
-            strncat(ordini[count].idOrdine, "_", 1);
-            strncat(ordini[count].idOrdine, libri[j].idLibro, 20);
-
-            ordini[count].cliente = &clienti[i];  // Impostazione del puntatore al cliente
-            ordini[count].libro = &libri[j];      // Impostazione del puntatore al libro
-
-            // Potresti voler inizializzare altri campi dell'ordine qui, come la quantità, lo stato, ecc.
-
+            snprintf(ordini[count].idOrdine, sizeof(ordini[count].idOrdine), "%s_%s", clienti[i].idCliente, libri[j].idLibro);
+            ordini[count].cliente = &clienti[i];
+            ordini[count].libro = &libri[j];
+            // Puoi inizializzare altri campi qui
             count++;
         }
     }
 }
+
 
 
 
