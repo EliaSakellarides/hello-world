@@ -21,20 +21,23 @@ typedef enum {
 } StatoOrdine;
 
 typedef struct {
-    char idOrdine[MAX_ID_ORDINE];
-    Cliente *cliente;
-    Libro *libro;
+	char idOrdine[10];
+	char idCliente[MAX_ID + 1];
+	char idLibro[20];
+	char isbn[20];
+	Cliente* cliente;
+	Libro* libro;
     int quantita;
     StatoOrdine stato;
 } Ordine;
 
-void generaOrdiniRandom(Ordine ordini[], int *numeroOrdini, Cliente clienti[], int numeroClienti, Libro libri[], int numeroLibri) {
-void inizializzaOrdini(Ordine ordini[]);
+
+void inizializzaOrdini(const Cliente clienti[], const Libro libri[], Ordine ordini[], int numeroClienti, int numeroLibri);
 int salvaOrdini(Ordine ordini[], int numeroOrdini);
 int aggiungiOrdine(Ordine ordini[], int *numeroOrdini, Ordine nuovoOrdine);
 int modificaOrdine(Ordine ordini[], int numeroOrdini, char idOrdine[], Ordine nuovoOrdine);
 int cancellaOrdine(Ordine ordini[], int *numeroOrdini, char idOrdine[]);
-void visualizzaOrdini(const Ordine ordini[], int numeroOrdini);
+void visualizzaOrdini(const Cliente clienti[], int numeroClienti, const Ordine ordini[], int numeroOrdini, const Libro libri[], int numeroLibri);
 void caricaOrdini(Ordine ordini[], int* numeroOrdini, int maxSize);
 int evadiOrdine(Ordine ordini[], int numeroOrdini, char idOrdine[]);
 const char* statoToString(StatoOrdine stato);

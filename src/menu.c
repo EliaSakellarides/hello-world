@@ -6,6 +6,7 @@
 #include "util.h"
 #include <stdio.h>
 #include "cliente.h"
+#include <string.h>
 
 void mostraMenu() {
     // Mostra il menu
@@ -106,8 +107,8 @@ void gestioneMenu(Cliente clienti[], int* numeroClienti, Ordine ordini[], int* n
                 break;
             }
 
-            nuovoOrdine.cliente = clienteSelezionato;  // Assegna direttamente il puntatore clienteSelezionato
-            nuovoOrdine.libro = libroSelezionato;      // Assegna direttamente il puntatore libroSelezionato
+            strcpy(nuovoOrdine.idCliente, clienteSelezionato->idCliente);
+            strcpy(nuovoOrdine.isbn, libroSelezionato->isbn);
 
             aggiungiOrdine(ordini, numeroOrdini, nuovoOrdine);
             break;
@@ -127,10 +128,36 @@ void gestioneMenu(Cliente clienti[], int* numeroClienti, Ordine ordini[], int* n
             break;
 
         case 8:
-            fflush(stdin); // Pulizia del buffer di input
-            visualizzaOrdini(ordini, *numeroOrdini);
-            break;
+            printf("Sto eseguendo il case 8!\n");
+            printf("Numero di ordini: %d\n", *numeroOrdini);
+            printf("Sto entrando nella funzione visualizzaOrdini!\n");
 
+            for (int i = 0; i < *numeroOrdini; i++)
+            {
+                printf("Sto analizzando l'ordine %d\n", i+1);
+
+                if (ordini[i].idCliente[0] == '\0' || ordini[i].isbn[0] == '\0')
+                {
+                	if (ordini[i].idCliente[0] == '\0') {
+                        printf("Ordine %d ha cliente NULL.\n", i+1);
+                    }
+                	if (ordini[i].isbn[0] == '\0') {
+                        printf("Ordine %d ha libro NULL.\n", i+1);
+                    }
+                    continue;
+                }
+
+                Cliente* tempCliente = ricercaCliente(clienti, *numeroClienti, ordini[i].idCliente);
+                Libro* tempLibro = ricercaLibro(libri, numeroLibri, ordini[i].isbn);
+                if(tempCliente) {
+                    strcpy(ordini[i].idCliente, tempCliente->idCliente);
+                }
+                if(tempLibro) {
+                    strcpy(ordini[i].isbn, tempLibro->isbn);
+                }
+            }
+            visualizzaOrdini(clienti, *numeroClienti, ordini, *numeroOrdini, libri, numeroLibri);
+            break;
         case 9:
             printf("Inserisci l'ID dell'ordine da evadere:\n");
             leggiRiga(idOrdine, sizeof(idOrdine));

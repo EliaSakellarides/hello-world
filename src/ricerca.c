@@ -1,7 +1,4 @@
 #include "ricerca.h"
-#include "ordine.h"
-#include "cliente.h"
-#include "libro.h"
 #include <string.h>
 
 Ordine* ricercaOrdine(Ordine ordini[], int numeroOrdini, char id[]) {
@@ -13,9 +10,7 @@ Ordine* ricercaOrdine(Ordine ordini[], int numeroOrdini, char id[]) {
     return NULL; // non trovato
 }
 
-
-
-Libro* ricercaLibro(Libro* libri, int numeroLibri, char* idOuTitolo) {
+Libro* ricercaLibro(Libro libri[], int numeroLibri, char idOuTitolo[]) { // Aggiornata la firma della funzione
     for (int i = 0; i < numeroLibri; i++) {
     	if (strcmp(libri[i].isbn, idOuTitolo) == 0) {
             return &libri[i];
@@ -24,12 +19,11 @@ Libro* ricercaLibro(Libro* libri, int numeroLibri, char* idOuTitolo) {
     return NULL;
 }
 
-Cliente* ricercaCliente(Cliente clienti[], int numeroClienti, const char id[]) {
+Cliente* ricercaCliente(Cliente clienti[], int numeroClienti, char id[]){
     for (int i = 0; i < numeroClienti; i++) {
         if (strcmp(clienti[i].idCliente, id) == 0) {
             return &clienti[i];
         }
     }
-    return NULL; // non trovato
+    return NULL;
 }
-

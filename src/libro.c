@@ -54,17 +54,17 @@ void inizializzaLibri(Libro libri[]) {
     for (int i = 0; i < 20; i++) {
            snprintf(libri[i].idLibro, sizeof(libri[i].idLibro), "L%03d", i+1);
            strncpy(libri[i].titolo, titoli[i], sizeof(libri[i].titolo) - 1);
-           libri[i].titolo[sizeof(libri[i].titolo) - 1] = '\0';  // Termination for safety
+           libri[i].titolo[sizeof(libri[i].titolo) - 1] = '\0';
 
            strncpy(libri[i].autore, autori[i], sizeof(libri[i].autore) - 1);
-           libri[i].autore[sizeof(libri[i].autore) - 1] = '\0';  // Termination for safety
+           libri[i].autore[sizeof(libri[i].autore) - 1] = '\0';
 
            libri[i].annoPubblicazione = anniPubblicazione[i];
            strncpy(libri[i].isbn, isbn[i], sizeof(libri[i].isbn) - 1);
-           libri[i].isbn[sizeof(libri[i].isbn) - 1] = '\0';  // Termination for safety
+           libri[i].isbn[sizeof(libri[i].isbn) - 1] = '\0';
 
            strncpy(libri[i].scuola, scuola[i], sizeof(libri[i].scuola) - 1);
-           libri[i].scuola[sizeof(libri[i].scuola) - 1] = '\0';  // Termination for safety
+           libri[i].scuola[sizeof(libri[i].scuola) - 1] = '\0';
        }
    }
 

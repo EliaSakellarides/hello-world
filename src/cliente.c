@@ -94,26 +94,27 @@ int caricaClienti(Cliente clienti[], int* numeroClienti) {
         return -1;
     }
 
+    // Carichiamo i dati dei clienti dal file
+    fread(clienti, sizeof(Cliente), *numeroClienti, clientiBinFile);
+
+    // (Opzionale) Verifica la validità dei clienti
     int numClientiVerificato = 0;
     for (int i = 0; i < *numeroClienti; i++) {
-        if (clienti[i].idCliente[0] != '\0') {  // Assumendo che un ID vuoto indichi un record non valido
+        if (clienti[i].idCliente[0] != '\0') {
             numClientiVerificato++;
         }
     }
+
     if (numClientiVerificato != *numeroClienti) {
         printf("Attenzione: discrepanza nei dati dei clienti. Corretto il numero di clienti da %d a %d.\n", *numeroClienti, numClientiVerificato);
         *numeroClienti = numClientiVerificato;
     }
 
-
-    // Carichiamo i dati dei clienti dal file
-    fread(clienti, sizeof(Cliente), *numeroClienti, clientiBinFile);
-
     // Chiusura del file
     fclose(clientiBinFile);
-
     return 0;  // Ritorna 0 in caso di successo
 }
+
 
 
 

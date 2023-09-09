@@ -18,16 +18,36 @@ const char* statoToString(StatoOrdine stato) {
 
 
 
-void inizializzaOrdini(Ordine ordini[]) {
-	for (int i = 0; i < MAX_ORDINI; i++) {
-	    strcpy(ordini[i].idOrdine, "");
+void inizializzaOrdini(const Cliente clienti[], const Libro libri[], Ordine ordini[], int numeroClienti, int numeroLibri) {
 
-	        ordini[i].cliente = NULL;
-	        ordini[i].libro = NULL;
-	        ordini[i].quantita = 0;
-	        ordini[i].stato = StatoInserito;
-	}
+    // Supponiamo che tu voglia creare un ordine per ogni cliente e libro
+    int count = 0; // Questo terrà traccia di quanti ordini sono stati effettivamente creati
+
+    for (int i = 0; i < numeroClienti; i++) {
+        for (int j = 0; j < numeroLibri; j++) {
+            if (count >= MAX_ORDINI) {
+                printf("Raggiunto il massimo numero di ordini possibili.\n");
+                return;
+            }
+
+            // Inizializzazione dell'ordine
+            strncpy(ordini[count].idOrdine, clienti[i].idCliente, MAX_ID + 1);
+            strncat(ordini[count].idOrdine, "_", 1);
+            strncat(ordini[count].idOrdine, libri[j].idLibro, 20);
+
+            ordini[count].cliente = &clienti[i];  // Impostazione del puntatore al cliente
+            ordini[count].libro = &libri[j];      // Impostazione del puntatore al libro
+
+            // Potresti voler inizializzare altri campi dell'ordine qui, come la quantità, lo stato, ecc.
+
+            count++;
+        }
+    }
 }
+
+
+
+
 
 int salvaOrdini(Ordine ordini[], int numeroOrdini) {
     FILE* file = fopen("ordini.bin", "wb");
@@ -47,7 +67,7 @@ void caricaOrdini(Ordine ordini[], int* numeroOrdini, int maxSize) {
     FILE* file = fopen("ordini.bin", "rb");
     if (file == NULL) {
         *numeroOrdini = 0;
-        return;
+        return;   // This is okay since the function's return type is void
     }
 
     int count = 0;
@@ -57,7 +77,7 @@ void caricaOrdini(Ordine ordini[], int* numeroOrdini, int maxSize) {
 
     if (fclose(file) != 0) {
         perror("Failed to close the file");
-        return;
+        return;   // You might want to handle this error more gracefully in a real application
     }
     *numeroOrdini = count;
 }
@@ -71,6 +91,8 @@ int aggiungiOrdine(Ordine ordini[], int *numeroOrdini, Ordine nuovoOrdine) {
     (*numeroOrdini)++;
     salvaOrdini(ordini, *numeroOrdini);
     return 1; 
+
+
 }
 
 int modificaOrdine(Ordine ordini[], int numeroOrdini, char idOrdine[], Ordine nuovoOrdine) {
@@ -104,6 +126,7 @@ int cancellaOrdine(Ordine ordini[], int *numeroOrdini, char idOrdine[]) {
     return 1;
 }
 
+
 int evadiOrdine(Ordine ordini[], int numeroOrdini, char idOrdine[]) {
     for (int i = 0; i < numeroOrdini; i++) {
         if (strcmp(ordini[i].idOrdine, idOrdine) == 0) {
@@ -115,11 +138,17 @@ int evadiOrdine(Ordine ordini[], int numeroOrdini, char idOrdine[]) {
     return 0;
 }
 
-void visualizzaOrdini(const Ordine ordini[], int numeroOrdini) {
+void visualizzaOrdini(const Cliente clienti[], int numeroClienti, const Ordine ordini[], int numeroOrdini, const Libro libri[], int numeroLibri) {
     if (ordini == NULL || numeroOrdini <= 0) {
         printf("Nessun ordine da visualizzare.\n");
         return;
     }
+
+
+    // Header della tabella
+    printf("%-10s %-10s %-15s %-15s %-30s %-10s %-10s\n",
+           "ID Ordine", "ID Cliente", "Nome", "Cognome", "Titolo Libro", "Quantita", "Stato");
+    printf("-----------------------------------------------------------------------------------------------------------\n");
 
     for (int i = 0; i < numeroOrdini; i++) {
         if (ordini[i].cliente == NULL || ordini[i].libro == NULL) {
@@ -127,16 +156,17 @@ void visualizzaOrdini(const Ordine ordini[], int numeroOrdini) {
             continue;
         }
 
-        printf("ID Ordine: %s\n", ordini[i].idOrdine);
-        printf("ID Cliente: %s\n", ordini[i].cliente->idCliente);
-        printf("Cliente: %s %s\n", ordini[i].cliente->nome, ordini[i].cliente->cognome);
-        printf("ID Libro: %s\n", ordini[i].libro->idLibro);
-        printf("Libro: %s\n", ordini[i].libro->titolo);
-        printf("Quantita: %d\n", ordini[i].quantita);
-        printf("Stato: %s\n", statoToString(ordini[i].stato));
-        printf("\n-------------------------\n");
+        printf("%-10s %-10s %-15s %-15s %-30s %-10d %-10s\n",
+               ordini[i].idOrdine,
+               ordini[i].cliente->idCliente,
+               ordini[i].cliente->nome,
+               ordini[i].cliente->cognome,
+               ordini[i].libro->titolo,
+               ordini[i].quantita,
+               statoToString(ordini[i].stato));
     }
 }
+
 
 
 
