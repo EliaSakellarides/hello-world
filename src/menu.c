@@ -21,6 +21,8 @@ void mostraMenu() {
     printf("8. Visualizza ordini\n");
     printf("9. Evadi ordine\n");
     printf("10. Visualizza tutti i libri\n");
+    printf("11. Visualizza libri ordinati per titolo\n");
+    printf("12. Visualizza il cliente con il numero maggiore di libri ordinati\n");
     printf("0. Esci\n");
     printf("Scegli un'opzione: ");
 }
@@ -164,6 +166,13 @@ void gestioneMenu(Cliente clienti[], int* numeroClienti, Ordine ordini[], int* n
             visualizzaLibri(libri, numeroLibri);
             break;
 
+        case 11 :
+        	ordinaEVisualizzaLibri(libri, numeroLibri);
+        	break;
+        case 12 :
+
+            visualizzaClienteConPiuOrdini(clienti, *numeroClienti, ordini, *numeroOrdini);
+           break;
         case 0:
             printf("Uscita...\n");
             break;

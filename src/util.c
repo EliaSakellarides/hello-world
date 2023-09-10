@@ -12,10 +12,11 @@ void pulisciBuffer() {
 void leggiRiga(char* buffer, int size) {
     if (buffer && size > 0) {
         if (fgets(buffer, size, stdin)) {
-            // Remove the newline character at the end, if present
             char* newline = strchr(buffer, '\n');
             if (newline) {
                 *newline = '\0';
+            } else {
+                pulisciBuffer();
             }
         }
     }

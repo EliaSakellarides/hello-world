@@ -16,7 +16,7 @@ int compareClienti(const Cliente* a, const Cliente* b) {
 
 // Comparazione per i Libri basata sull'ISBN
 int compareLibri(const Libro* a, const Libro* b) {
-    return strcmp(a->isbn, b->isbn);
+    return strcmp(a->titolo, b->titolo);
 }
 
 // Partition per Ordini
@@ -107,4 +107,9 @@ void quickSortLibri(Libro libri[], int primo, int ultimo) {
         quickSortLibri(libri, primo, pi - 1);
         quickSortLibri(libri, pi + 1, ultimo);
     }
+}
+
+void ordinaEVisualizzaLibri(Libro libri[], int numeroLibri) {
+    quickSortLibri(libri, 0, numeroLibri - 1);
+    visualizzaLibri(libri, numeroLibri);
 }

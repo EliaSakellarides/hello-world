@@ -121,14 +121,11 @@ int salvaClienti(Cliente clienti[], int numeroClienti) {
         return -1;
     }
 
-    // Scrivi la versione del file prima di tutto
-    int tempVersion = CLIENTI_FILE_VERSION;
-    fwrite(&tempVersion, sizeof(int), 1, file);
     fwrite(&numeroClienti, sizeof(int), 1, file);
-    fwrite(clienti, sizeof(Cliente), numeroClienti, file);
-    fclose(file);
-    return 0;
-}
+        fwrite(clienti, sizeof(Cliente), numeroClienti, file);
+        fclose(file);
+        return 0;
+    }
 
 
 

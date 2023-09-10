@@ -9,6 +9,8 @@
 int compareOrdini(const Ordine* a, const Ordine* b);
 int compareClienti(const Cliente* a, const Cliente* b);
 int compareLibri(const Libro* a, const Libro* b);
+void ordinaEVisualizzaLibri(Libro libri[], int numeroLibri);
+
 
 // Funzioni QuickSort per Ordini
 void quickSortOrdini(Ordine ordini[], int primo, int ultimo);

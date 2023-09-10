@@ -26,6 +26,7 @@ typedef struct {
     Libro* libro;
     int quantita;
     StatoOrdine stato;
+    int numeroOrdini;
 } Ordine;
 
 
@@ -39,6 +40,8 @@ void visualizzaOrdini(const Cliente clienti[], int numeroClienti, const Ordine o
 void caricaOrdini(Ordine ordini[], int* numeroOrdini, int maxSize);
 int evadiOrdine(Ordine ordini[], int numeroOrdini, char idOrdine[]);
 const char* statoToString(StatoOrdine stato);
+void visualizzaClienteConPiuOrdini(Cliente clienti[], int numeroClienti, Ordine ordini[], int numeroOrdini);
+
 
 
 #endif

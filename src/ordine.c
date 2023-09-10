@@ -44,7 +44,13 @@ void inizializzaOrdini(Cliente *clienti, Libro *libri, Ordine *ordini, int numer
 
 int salvaOrdini(Ordine ordini[], int numeroOrdini) {
     FILE* file = fopen("ordini.bin", "wb");
-    if (file == NULL || numeroOrdini == 0) {
+    if (!file) {
+        perror("Errore nell'apertura del file ordini.bin");
+        return -1;
+    }
+
+    if (numeroOrdini == 0) {
+        fclose(file);
         return 0;
     }
 
@@ -138,6 +144,7 @@ void visualizzaOrdini(const Cliente clienti[], int numeroClienti, const Ordine o
     }
 
 
+
     // Header della tabella
     printf("%-10s %-10s %-15s %-15s %-30s %-10s %-10s\n",
            "ID Ordine", "ID Cliente", "Nome", "Cognome", "Titolo Libro", "Quantita", "Stato");
@@ -159,6 +166,27 @@ void visualizzaOrdini(const Cliente clienti[], int numeroClienti, const Ordine o
                statoToString(ordini[i].stato));
     }
 }
+
+void visualizzaClienteConPiuOrdini(Cliente clienti[], int numeroClienti, Ordine ordini[], int numeroOrdini) {
+    int maxOrdini = 0;
+    Cliente* clienteTop = NULL;
+
+    for (int i = 0; i < numeroClienti; i++) {  // Cambia numeroOrdini con numeroClienti
+        if (clienti[i].numeroOrdini > maxOrdini) {
+            maxOrdini = clienti[i].numeroOrdini;
+            clienteTop = &clienti[i];
+        }
+    }
+
+    if (clienteTop) {
+        printf("Il cliente con il numero maggiore di ordini è: %s %s con %d ordini.\n",
+               clienteTop->nome, clienteTop->cognome, clienteTop->numeroOrdini);
+    } else {
+        printf("Nessun cliente trovato.\n");
+    }
+}
+
+
 
 
 
